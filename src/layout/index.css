@@ -1,16 +1,263 @@
-* {
+/**
+copied from: https://meowni.ca/posts/monica-dot-css/ & https://hankchizljaw.com/wrote/a-modern-css-reset/
+**/
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-html {
-  height: 100%;
+/* Remove default padding */
+ul[class],
+ol[class] {
+  padding: 0;
+  list-style: none;
 }
 
-body {
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
   margin: 0;
-  padding: 0;
-  min-height: 100%;
-  min-width: 100%;
+}
+
+/* A elements that don't have a class get default styles */
+/* a:not([class]) {
+  text-decoration-skip-ink: auto;
+} */
+
+/* Make images easier to work with */
+img {
+  max-width: 100%;
+  display: inline-block;
+}
+
+/* Natural flow and rhythm in articles by default */
+article > * + * {
+  margin-top: 1em;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* make sure hidden inputs don't show */
+[hidden] {
+  display: none !important;
+}
+
+/* make sure disabled inputs aren't clickable */
+[disabled] {
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+/* helper classes */
+.horizontal {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.vertical {
+  display: flex;
+  flex-direction: column;
+}
+.center {
+  justify-content: center;
+  align-items: center;
+}
+.flex {
+  flex: 1;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* some good variables to use throughout the project */
+html {
+  font-family: "Inter", sans-serif;
+  --viewport-s: 321px;
+  --spacing-xs: 4px;
+  --spacing-s: 8px;
+  --spacing: 16px;
+  --spacing-m: 24px;
+  --spacing-l: 32px;
+  --spacing-xl: 48px;
+
+  /* --accent-color-hue: 243; */
+  --accent-color-hue: 225;
+  /* --accent-color: hsla(var(--accent-color-hue), 100%, 68%, 1); */
+  --accent-color: hsla(var(--accent-color-hue), 100%, 65%, 1);
+  /* --accent-color-darker: hsla(var(--accent-color-hue), 100%, 48%, 1); */
+  --accent-color-darker: hsla(var(--accent-color-hue), 100%, 45%, 1);
+  --accent-color-a10: hsla(var(--accent-color-hue), 100%, 68%, 0.1);
+  --accent-color-a30: hsla(var(--accent-color-hue), 100%, 68%, 0.3);
+  --accent-color-a50: hsla(var(--accent-color-hue), 100%, 68%, 0.5);
+
+  --dark-font-color: #111111;
+}
+
+h1,
+h2,
+h3,
+h4,
+.h1,
+.h2,
+.h3,
+.h4,
+.display {
+  font-family: "Epilogue", sans-serif;
+}
+
+.display {
+  font-size: 5rem;
+  line-height: 5.5rem;
+  letter-spacing: -2;
+}
+h1,
+.h1 {
+  font-size: 3.5rem;
+  line-height: 4rem;
+}
+h2,
+.h2 {
+  font-size: 2.5rem;
+  line-height: 3rem;
+}
+h3,
+.h3 {
+  font-size: 2.25rem;
+  line-height: 2.7rem; /*  was 48px */
+  letter-spacing: -0.75;
+}
+h4,
+.h4 {
+  font-size: 1.75rem;
+  line-height: 2.125rem;
+  letter-spacing: -0.2;
+}
+h5,
+.h5 {
+  text-transform: uppercase;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  letter-spacing: 5;
+}
+h6,
+.h6 {
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  line-height: 1.125rem;
+  letter-spacing: 5;
+}
+
+.label {
+  font-family: "Inter";
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+p {
+  font-size: 1.125rem;
+  line-height: 1.5;
+}
+
+p:not(:last-child) {
+  margin-bottom: var(--spacing-m);
+}
+/* a {
+  color: var(--accent-color);
+}
+a:hover {
+  color: var(--accent-color-darker);
+} */
+a:not([class]),
+a[class~="active"] {
+  color: var(--accent-color);
+  text-decoration: none;
+  border-bottom: 2px solid var(--accent-color-a50);
+  font-weight: bold;
+}
+a:not([class]):hover {
+  color: var(--accent-color-darker);
+  border-bottom-color: var(--accent-color);
+  background-color: var(--accent-color-a10);
+}
+/* h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a,
+p a {
+  text-decoration: none;
+  border-bottom: 2px solid var(--accent-color-a50);
+  font-weight: bold;
+} */
+/* h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a,
+p a:hover {
+  border-bottom-color: var(--accent-color);
+  background-color: var(--accent-color-a10);
+} */
+
+.body-xl {
+  font-size: 1.5rem;
+  line-height: 1.5;
+}
+.body-l {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  /* letter-spacing: -0.1; */
+}
+.body-m {
+  font-size: 1.125rem;
+  line-height: 1.5;
+}
+.body-s {
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+.body-xs {
+  font-size: 0.75rem;
+  line-height: 1.3;
 }
 
 #___gatsby #gatsby-focus-wrapper {
@@ -18,9 +265,42 @@ body {
   min-width: 100vw;
 }
 
-.layout-container {
-  min-height: 100vh;
-  min-width: 100vw;
-  display: flex;
-  padding: 20px;
+.row {
+  /* display: flex; */
+  /* width: clamp(100% - 48px, 100%, 53rem); */
+  max-width: 54rem;
+  width: calc(100% - var(--spacing) * 2);
+  margin: 0 auto;
+  /* min-height: 100vh; */
+  /* min-width: 100vw; */
+  /* display: flex; */
+  /* padding: 20px; */
 }
+
+.flex {
+  display: flex;
+}
+
+.mb {
+  margin-bottom: var(--spacing);
+}
+.mb-m {
+  margin-bottom: var(--spacing-m);
+}
+.mb-xl {
+  margin-bottom: var(--spacing-xl);
+}
+.mt-xl {
+  margin-top: var(--spacing-xl);
+}
+
+@media screen and (min-width: 321px) {
+  .row {
+    width: calc(100% - var(--spacing-m) * 2);
+  }
+}
+
+/* @media screen and (min-width: 769px) {
+  .row {
+  }
+} */

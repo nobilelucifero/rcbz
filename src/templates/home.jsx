@@ -1,14 +1,13 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import { graphql } from "gatsby";
+// import { graphql } from "gatsby";
 import Layout from "../layout";
-// import HomePage from "../components/HomePage/HomePage";
-import Blog from "../components/Blog/Blog";
+import HomePage from "../components/HomePage/HomePage";
 import PostListing from "../components/PostListing/PostListing";
 import SEO from "../components/SEO/SEO";
 import config from "../../data/SiteConfig";
 
-class Landing extends React.Component {
+class Home extends React.Component {
   render() {
     const postEdges = this.props.data.allMarkdownRemark.edges;
     return (
@@ -17,9 +16,9 @@ class Landing extends React.Component {
         {/* <div className="posts-container0"> */}
         <Helmet title={config.siteTitle} />
         <SEO />
-        <Blog />
-        <PostListing postEdges={postEdges} />
-        Helloooo
+        <HomePage />
+        {/* Helloooo */}
+        {/* <PostListing postEdges={postEdges} /> */}
         {/* </div> */}
         {/* // </div> */}
       </Layout>
@@ -27,11 +26,11 @@ class Landing extends React.Component {
   }
 }
 
-export default Landing;
+export default Home;
 
 /* eslint no-undef: "off" */
 export const pageQuery = graphql`
-  query LandingQuery {
+  query HomeQuery {
     allMarkdownRemark(sort: { fields: [fields___date], order: DESC }) {
       edges {
         node {

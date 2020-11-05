@@ -1,0 +1,83 @@
+ use a package make sure that 'components/Navbar/gatsby' is installed. If you're trying to use a local file make sure that the pa
+
+ <section className="row mt-xl mb-xl">
+          <h3 className="label">Riccardo Buzzotta</h3>
+          <p className="body-xs">
+            Product Designer with a focus on Product Managent.
+          </p>
+        </section>
+        <section className="row mb-xl">
+          {/* <p className="label0 mb">Welcome to my little website 👋</p> */}
+          <p className="h2 mb-m">
+            Creator of chaos on my desk. <br />
+            Designing products with purpose.
+          </p>
+          <p className="body-l mb-m">
+            Design and Product are my daily bread and butter. I like coding and
+            prototyping, doodling, and I am passionate about all things
+            Strategy, industries of the future, and your good 'ol upcoming OKR
+            planning session (you know it's coming!).
+          </p>
+          <p>
+            📍 &nbsp;Senior Product Designer at Spotify, based in London.
+            <br />
+            📮 &nbsp;Interested in collaborating or getting advice?{" "}
+            <a href="mailto:riccardo.buzzotta@gmail.com?subject=Message%20from%20rcbz.me">
+              Email me
+            </a>{" "}
+            or write me on{" "}
+            <a href="https://linkedin.com/in/riccardobuzz" target="_blank">
+              Linkedin
+            </a>
+            .
+          </p>
+        </section>
+
+        <section class="row mb-xl">
+          <h4>About me</h4>
+          <p>
+            Creative Agency, 4-people start-up, hypergrowth company, 14K+
+            employees corporation, freelance Product consultant. Kind of tried
+            them all here!
+          </p>
+
+          <p>
+            Like many millenials I enjoy travel, and I've grown to appreaciate
+            brunch (my parents still can't understand the allure of it). <br />
+            What I enjoy the most though is the <em>boring stuff</em>. Meeting
+            friends for long walks, read, draw, import Italian biscotti and
+            other <span title="grandma, in Italian">nonna</span> goods whenever
+            I can. 🍪
+          </p>
+          <p>
+            2020 goals:{" "}
+            <del>
+              read more books, get some decent exercise done, and launch at
+              least two side-projects I've been cooking up for too long
+            </del>{" "}
+            make it sanely out of a global pandemic. 😅
+          </p>
+
+          <h4>Stalk me on</h4>
+          <p>
+            <a href="https://linkedin.com/in/riccardobuzz" target="_blank">
+              Linkedin
+            </a>
+            &ensp;·&ensp;
+            <a href="https://twitter.com/creativespooks" target="_blank">
+              Twitter
+            </a>
+            &ensp;·&ensp;
+            <a href="https://dribbble.com/creativespooks" target="_blank">
+              Dribbble
+            </a>
+            &ensp;·&ensp;
+            <a href="https://github.com/creativespooks" target="_blank">
+              Github
+            </a>
+            &ensp;·&ensp;
+            <a href="https://instagram.com/boredoomandstuff" target="_blank">
+              Instagram
+            </a>
+          </p>
+        </section>

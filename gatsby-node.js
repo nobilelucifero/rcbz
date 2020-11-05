@@ -15,18 +15,18 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       Object.prototype.hasOwnProperty.call(node, "frontmatter") &&
       Object.prototype.hasOwnProperty.call(node.frontmatter, "title")
     ) {
-      slug = `/${_.kebabCase(node.frontmatter.title)}`;
+      slug = `/blog/${_.kebabCase(node.frontmatter.title)}`;
     } else if (parsedFilePath.name !== "index" && parsedFilePath.dir !== "") {
-      slug = `/${parsedFilePath.dir}/${parsedFilePath.name}/`;
+      slug = `/blog/${parsedFilePath.dir}/${parsedFilePath.name}/`;
     } else if (parsedFilePath.dir === "") {
-      slug = `/${parsedFilePath.name}/`;
+      slug = `/blog/${parsedFilePath.name}/`;
     } else {
-      slug = `/${parsedFilePath.dir}/`;
+      slug = `/blog/${parsedFilePath.dir}/`;
     }
 
     if (Object.prototype.hasOwnProperty.call(node, "frontmatter")) {
       if (Object.prototype.hasOwnProperty.call(node.frontmatter, "slug"))
-        slug = `/${_.kebabCase(node.frontmatter.slug)}`;
+        slug = `/blog/${_.kebabCase(node.frontmatter.slug)}`;
       if (Object.prototype.hasOwnProperty.call(node.frontmatter, "date")) {
         const date = moment(node.frontmatter.date, siteConfig.dateFromFormat);
         if (!date.isValid)
@@ -46,6 +46,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const categoryPage = path.resolve("src/templates/category.jsx");
   const listingPage = path.resolve("./src/templates/listing.jsx");
   const landingPage = path.resolve("./src/templates/landing.jsx");
+  const homePage = path.resolve("./src/templates/home.jsx");
 
   // Get a full list of markdown posts
   const markdownQueryResult = await graphql(`
@@ -98,34 +99,35 @@ exports.createPages = async ({ graphql, actions }) => {
 
   // Paging
   const { postsPerPage } = siteConfig;
-  if (postsPerPage) {
-    const pageCount = Math.ceil(postsEdges.length / postsPerPage);
+  // if (postsPerPage != 0) {
+  const pageCount = Math.ceil(postsEdges.length / postsPerPage);
 
-    [...Array(pageCount)].forEach((_val, pageNum) => {
-      createPage({
-        path: pageNum === 0 ? `/` : `/${pageNum + 1}/`,
-        component: listingPage,
-        context: {
-          limit: postsPerPage,
-          skip: pageNum * postsPerPage,
-          pageCount,
-          currentPageNum: pageNum + 1
-        }
-      });
-    });
-  } else {
-    // Load the landing page instead
+  [...Array(pageCount)].forEach((_val, pageNum) => {
     createPage({
-      path: `/`,
-      component: landingPage
+      path: pageNum === 0 ? `/blog/` : `/blog/${pageNum + 1}/`,
+      // component: landingPage,
+      component: listingPage,
+      context: {
+        limit: postsPerPage,
+        skip: pageNum * postsPerPage,
+        pageCount,
+        currentPageNum: pageNum + 1,
+      },
     });
-  }
+  });
+  // } else {
+  //   // Load the landing page instead
+  createPage({
+    path: `/`,
+    component: homePage,
+  });
+  // }
 
   // Post page creating
   postsEdges.forEach((edge, index) => {
     // Generate a list of tags
     if (edge.node.frontmatter.tags) {
-      edge.node.frontmatter.tags.forEach(tag => {
+      edge.node.frontmatter.tags.forEach((tag) => {
         tagSet.add(tag);
       });
     }
@@ -149,26 +151,26 @@ exports.createPages = async ({ graphql, actions }) => {
         nexttitle: nextEdge.node.frontmatter.title,
         nextslug: nextEdge.node.fields.slug,
         prevtitle: prevEdge.node.frontmatter.title,
-        prevslug: prevEdge.node.fields.slug
-      }
+        prevslug: prevEdge.node.fields.slug,
+      },
     });
   });
 
   //  Create tag pages
-  tagSet.forEach(tag => {
+  tagSet.forEach((tag) => {
     createPage({
       path: `/tags/${_.kebabCase(tag)}/`,
       component: tagPage,
-      context: { tag }
+      context: { tag },
     });
   });
 
   // Create category pages
-  categorySet.forEach(category => {
+  categorySet.forEach((category) => {
     createPage({
       path: `/categories/${_.kebabCase(category)}/`,
       component: categoryPage,
-      context: { category }
+      context: { category },
     });
   });
 };

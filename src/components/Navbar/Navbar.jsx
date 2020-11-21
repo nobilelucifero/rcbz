@@ -26,9 +26,9 @@ class Navbar extends Component {
                 {/* <Link to="/" className=""> */}
                 Home
               </Link>
-              <Link to="/about" className="nav__link label">
+              {/* <Link to="/about" className="nav__link label">
                 About
-              </Link>
+              </Link> */}
               <Link to="/blog" className="nav__link label">
                 Blog
               </Link>
